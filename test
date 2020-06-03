@@ -1,0 +1,27 @@
+<tbody>
+<?php
+
+                                         $student_id = $row['phone'];
+                                         $query = "SELECT issue_book.book_issue_date, books.book_name, books.book_image
+                                                  FROM books
+                                                  INNER JOIN issue_book ON issue_book.book_id = books.id
+                                                  WHERE issue_book.student_id = '$student_id'";
+
+                                         $results = mysqli_query($connection,$query);
+
+
+                                         while ($row = mysqli_fetch_assoc($results)) { ?>
+<tr>
+
+
+    <td><?=$row['book_name']?></td>
+    <td> <img width="100" height="100" src="../images/books/<?=$row['book_image']?>" alt=""> </td>
+    <td><?=date('d-M-Y',strtotime($row['book_issue_date']))?></td>
+</tr>
+<?php
+
+                                         }
+
+                                         ?>
+
+</tbody>
